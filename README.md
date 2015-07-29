@@ -17,10 +17,14 @@ require "gro"
 
 ## Command line use
 
+Without GRO :
 ```
   $ lua -e 'os=nil' -l os -e 'print(os and "yes" or "no")'
 yes
+```
 
+With GRO :
+```
 $ lua -e 'os=nil' -l gro -l os -e 'print(os and "yes" or "no")'
 drop global write of 'gro'
 drop global write of 'os'
