@@ -5,8 +5,9 @@ If you write something in global environment an error will be raised.
 There is stuff to silencly drop some write request.
 Exceptions:
  * if the name of the variable and the value are found in the loaded packages
- * the variable named `_`
- * all variable starting with `__` (like __index, __newindex, ...)
+ * allow one time to write the variable `arg` : done by the interpretor when we launch script with command line arguments.
+ * the variable named `_` : Use by me for shell code launcher (see below)
+
 
 # How to use
 
@@ -14,6 +15,7 @@ Just load it.
 ```lua
 require "gro"
 ```
+
 
 ## Command line use
 
@@ -31,10 +33,17 @@ drop global write of 'os'
 no
 ```
 
+
 # Compatibility
 
 Tested with Lua/5.1, Lua/5.2 and LuaJIT/5.1.
 Should be compatible with any version of Lua.
+
+
+# About shell code launcher
+
+...FILLME...
+
 
 # License
 
