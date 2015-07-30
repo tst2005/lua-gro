@@ -1,21 +1,27 @@
 # GRO - Global Read-Only
 
 A simple way to lock the global environment.
-If you write something in global environment an error will be raised.
-There is stuff to silencly drop some write request.
+When something try to write in global environment, an error is raised.
+There is some stuff to silencly drop some write request without error.
 Exceptions:
- * if the name of the variable and the value are found in the loaded packages
- * allow one time to write the variable `arg` : done by the interpretor when we launch script with command line arguments.
+ * if the `name` of the variable AND the `value` are found in the loaded packages
+ * allow one time to write the variable `arg` : done by the interpretor when you launch script with command line arguments.
  * the variable named `_` : Use by me for shell code launcher (see below)
 
 
 # How to use
 
 Just load it.
+
+In lua module :
 ```lua
 require "gro"
 ```
 
+In command line :
+```
+$ lua -l gro
+```
 
 ## Command line use
 
@@ -42,7 +48,20 @@ Should be compatible with any version of Lua.
 
 # About shell code launcher
 
-...FILLME...
+Sample :
+```
+#!/bin/sh
+_=[[
+        for name in luajit lua5.3 lua-5.3 lua5.2 lua-5.2 lua5.1 lua-5.1 lua; do
+                : ${LUA:=$(command -v luajit)}
+        done
+        LUA_PATH='./?.lua;./?/init.lua;./lib/?.lua;./lib/?/init.lua;;'
+        exec "$LUA" "$0" "$@"
+        exit $?
+]]
+_=nil
+-- lua code here ...
+```
 
 
 # License
