@@ -34,8 +34,8 @@ yes
 With GRO :
 ```
 $ lua -e 'os=nil' -l gro -l os -e 'print(os and "yes" or "no")'
-drop global write of 'gro'
-drop global write of 'os'
+drop global write of module 'gro'
+drop global write of module 'os'
 no
 ```
 
