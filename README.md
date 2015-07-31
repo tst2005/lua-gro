@@ -52,12 +52,16 @@ Sample :
 ```
 #!/bin/sh
 _=[[
-        for name in luajit lua5.3 lua-5.3 lua5.2 lua-5.2 lua5.1 lua-5.1 lua; do
-                : ${LUA:=$(command -v luajit)}
-        done
-        LUA_PATH='./?.lua;./?/init.lua;./lib/?.lua;./lib/?/init.lua;;'
-        exec "$LUA" "$0" "$@"
-        exit $?
+	for name in luajit lua5.3 lua-5.3 lua5.2 lua-5.2 lua5.1 lua-5.1 lua; do
+		: ${LUA:="$(command -v "$name")"}
+	done
+	if [ -z "$LUA" ]; then
+		echo >&2 "ERROR: lua interpretor not found"
+		exit 1
+	fi
+	LUA_PATH='./?.lua;./?/init.lua;./lib/?.lua;./lib/?/init.lua;;'
+	exec "$LUA" "$0" "$@"
+	exit $?
 ]]
 _=nil
 -- lua code here ...
