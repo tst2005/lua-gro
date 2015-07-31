@@ -53,7 +53,7 @@ local loaded = require"package".loaded
 			end
 		end
 		--print(_g_, name, value)
-		error( ("global env is read-only. Write of %q"):format(cutname(name)), 2)
+		error( ("Global env is read-only. Write of %q denied"):format(cutname(name)), 2)
 	end
 	ro_mt.__metatable=lock
 
