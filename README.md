@@ -8,6 +8,8 @@ Exceptions:
  * allow one time to write the variable `arg` : done by the interpretor when you launch script with command line arguments.
  * the variable named `_` : Use by me for shell code launcher (see below)
 
+There is not special exception about `_ENV` because in lua 5.2+ the _ENV are managed by the interpretor, the _G was not used/called.
+
 
 # How to use
 
