@@ -2,6 +2,11 @@
 local _M = {}
 local loaded = require"package".loaded
 
+local verbose = true
+local function putmsg(msg)
+	io.stderr:write(msg)
+end
+
 --if getmetatable(_G) == nil then
 	local lock = {}
 	local lock_mt = {__newindex=function() end, __tostring=function() return "locked" end, __metatable=assert(lock)}
@@ -43,7 +48,7 @@ local loaded = require"package".loaded
 			return
 		end
 		if loaded[name]==value then
-			io.stderr:write("drop global write of module '"..tostring(name).."'\n")
+			if verbose then putmsg("drop global write of module '"..tostring(name).."'\n") end
 			return -- just drop
 		end
 		if name == "arg" then
@@ -63,4 +68,7 @@ local loaded = require"package".loaded
 	end
 --end
 
-return {}
+return {
+	quiet=function() verbose = false end,
+	verbose=function() verbose = true end,
+}
